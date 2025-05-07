@@ -1,3 +1,4 @@
+
 from tensorflow.keras.models import Sequential 
 from tensorflow.keras.layers import Dense, Dropout, MaxPooling2D, Conv2D, Activation
 from tensorflow.keras.utils import to_categorical
@@ -7,13 +8,11 @@ from tensorflow.keras import backend as k
 from tensorflow.keras.optimizers import  SGD, Adam
 from tensorflow.keras.callbacks import ReduceLROnPlateau, EarlyStopping, ModelCheckpoint
 
-from tensorflow.keras.applications import vgg19
+from tensorflow.keras.applications import VGG19
 from tensorflow.keras.applications.vgg19 import preprocess_input as vgg19_preprocess_input
-from tensorflow.keras.applications.resnet50 import preprocess_input as resnet50_preprocess_input
 from tensorflow.keras.models import load_model
 from tensorflow.keras.models import Model
-from tensorflow.keras.models import load_model
-from tensorflow.keras.models import Model
+
 import keras
 
 import os
@@ -63,7 +62,7 @@ def read_image(file_path, size):
 train_list=[]
 for category_id, category in enumerate(CATEGORIES):
     for file_name in os.listdir(os.path.join(foldert, category)):
-        train_list.append(['Training/{}/{}'.format(category, file_name), category_id, category])
+        train_list.append(['{}/{}'.format(category, file_name), category_id, category])
 train_list = pd.DataFrame(train_list, columns = ['file', 'category_id', 'category'])
 print(train_list.shape)
 
@@ -79,7 +78,7 @@ print(test_list.head())
 
 #visulaizing the data images 
 IMAGE_PER_CATEGORY = 4
-fig = plt.fogure(1, figsize=(8,8))
+fig = plt.figure(1, figsize=(8,8))
 grid = ImageGrid(fig, 111, nrows_ncols=(IMAGE_PER_CATEGORY, NUM_OF_CATEGORIES), axes_pad=0.1)    
 
 i = 0
@@ -95,3 +94,17 @@ for category_id, category in enumerate(CATEGORIES):
         i += 1
 
 plt.show()
+
+
+np.random.seed (seed=SEED)
+
+
+
+INPUT_SHAPE = (150, 150, 3)
+
+# Load VGG19 without top FC layers
+vgg19 = VGG19(include_top=False, weights='imagenet', input_shape=INPUT_SHAPE)
+vgg19.summary()
+
+for i, layer in enumerate(vgg19.layers):
+    print(f" {i} {layer.__class__.__name__, layer.trainable}")
