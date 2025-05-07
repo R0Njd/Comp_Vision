@@ -38,3 +38,4 @@ cv2.imshow("image1", img1_resized)
 cv2.imshow("image2", img2_resized)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
