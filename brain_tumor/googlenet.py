@@ -32,7 +32,7 @@ train_loader = DataLoader(train_data, batch_size=16, shuffle=True)
 val_loader = DataLoader(val_data, batch_size=16, shuffle=False)
 test_loader = DataLoader(test_dataset, batch_size=16, shuffle=False)
 
-# Visualization
+#Visualization
 IMAGE_PER_CATEGORY = 4
 CATEGORIES = train_dataset.classes
 NUM_OF_CATEGORIES = len(CATEGORIES)
