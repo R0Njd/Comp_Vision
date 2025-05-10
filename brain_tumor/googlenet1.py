@@ -131,7 +131,7 @@ for epoch in range(num_epochs):
     val_acc = 100 * val_correct / val_total
 
     print(f"Epoch {epoch+1}: Train Acc={train_acc:.2f}%, Val Acc={val_acc:.2f}%")
-    
+
  
 # Final Test Accuracy
 model.eval()
@@ -151,7 +151,3 @@ test_acc = 100 * test_correct / test_total
 print(f"Final Test Accuracy:        {test_acc:.2f}%")
 
 
-# Train and test
-train_model(model, train_loader, val_loader, epochs=5)
-test_acc = evaluate(model, test_loader)
-print(f"\n\U0001F9EA Final Test Accuracy: {test_acc:.2f}%")
